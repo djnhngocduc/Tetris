@@ -6,12 +6,26 @@
 #include <SDL_image.h>
 #include <string>
 #include <map>
+using namespace std;
 
 class Tetris {
 public:
 	Tetris() {
-		
+		for (int i = 0; i < Lines; i++) {
+			for (int j = 0; j < Cols; j++) matrix[i][j] = 0;
+		}
+
+		highScores["Classic"] = 0;
+		highScores["Neon"] = 0;
+		highScores["Retro"] = 0;
+
 	}
+
+	string GetExeDir();
+
+	void SaveHighScore();
+	void LoadHighScore();
+
 
 private:
 	enum {
@@ -19,14 +33,6 @@ private:
 		Cols = 10
 	};
 
-	enum Theme {
-		CLASSIC, 
-		NEON, 
-		RETRO
-	};
-
-	bool choosingTheme;
-	Theme currentTheme;
 	map<string, int> highScores;
 
 	int matrix[Lines][Cols];
