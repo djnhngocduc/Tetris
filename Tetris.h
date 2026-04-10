@@ -24,6 +24,8 @@ public:
 
 	void Gameplay();
 
+	void GameOver();
+
 	string GetExeDir();
 
 	void SaveHighScore();
@@ -36,7 +38,7 @@ private:
 		Cols = 10
 	};
 
-	bool ispaused, gameOver, rotate;
+	bool ispaused, gameOver, rotate, running;
 
 	map<string, int> highScores;
 

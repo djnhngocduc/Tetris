@@ -100,6 +100,36 @@ void Tetris::Gameplay() {
     else delay = 1000;
 }
 
+void Tetris::GameOver() {
+    int game_over_count = 0;
+    for (int i = 0; i < Lines; i++) {
+        for (int j = 0; j < Cols; j++) {
+            if (matrix[i][j] != 0) {
+                game_over_count++;
+                break;
+            }
+        }
+    }
+    if (game_over_count == Lines) {
+        string theme;
+        if (currentTheme == CLASSIC) {
+            theme = "Classic";
+        }
+        else if (currentTheme == NEON) {
+            theme = "Neon";
+        }
+        else if (currentTheme == RETRO) {
+            theme = "Retro";
+        }
+        if (score > highScores[theme]) {
+            highScores[theme] = score;
+            SaveHighScore();
+        }
+        running = false;
+    }
+}
+
+
 string Tetris::GetExeDir() {
     char buffer[MAX_PATH];
     GetModuleFileNameA(NULL, buffer, MAX_PATH);
