@@ -22,6 +22,8 @@ public:
 	}
 	bool Tetrisvalid();
 
+	void Gameplay();
+
 	string GetExeDir();
 
 	void SaveHighScore();
@@ -34,6 +36,8 @@ private:
 		Cols = 10
 	};
 
+	bool ispaused, gameOver, rotate;
+
 	map<string, int> highScores;
 
 	int matrix[Lines][Cols];
@@ -41,6 +45,10 @@ private:
 	struct Point {
 		int x, y;
 	} items[4], backup[4];
+
+	int move, color, score;
+	Uint32 startTime, currentTime;
+	unsigned int delay;
 };
 
 #endif // TETRIS_H_

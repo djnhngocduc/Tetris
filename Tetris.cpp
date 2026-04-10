@@ -31,6 +31,75 @@ bool Tetris::Tetrisvalid() {
     return true;
 }
 
+void Tetris::Gameplay() {
+    gameOver = true;
+    // backup
+    if (ispaused == true) return;
+    for (int i = 0; i < 4; i++) {
+        backup[i] = items[i];  // save block khi va cham
+    }
+    //move
+    for (int i = 0; i < 4; i++) {
+        items[i].x += move;
+    }
+    if (!Tetrisvalid()) {   // xu li va cham khi move
+        for (int i = 0; i < 4; i++) {
+            items[i] = backup[i];
+        }
+    }
+    // rotate
+    if (rotate) {
+        Point p = items[2]; //// center of rotation
+        for (int i = 0; i < 4; i++) {
+            int x = items[i].y - p.y;
+            int y = items[i].x - p.x;
+            items[i].x = p.x - x;
+            items[i].y = p.y + y;
+        }
+        if (!Tetrisvalid()) { // xu ly va cham khi rotate
+            for (int i = 0; i < 4; i++) {
+                items[i] = backup[i];
+            }
+        }
+    }
+
+
+    // tick
+    if (currentTime - startTime > delay) {
+        for (int i = 0; i < 4; i++) backup[i] = items[i];
+        for (int i = 0; i < 4; i++) items[i].y++;
+        if (!Tetrisvalid()) {
+            for (int i = 0; i < 4; i++) matrix[backup[i].y][backup[i].x] = color;
+            Randomblocks();
+        }
+        startTime = currentTime;
+    }
+
+    // check lines
+    int k = Lines - 1;
+    for (int i = k; i > 0; i--) {
+        int count = 0;
+        for (int j = 0; j < Cols; j++) {
+            if (matrix[i][j]) count++;
+            matrix[k][j] = matrix[i][j];
+        }
+        if (count < Cols) k--;
+        if (count == Cols) {
+            Sound.Audio_short("sound/clear.wav");
+            score += 100;
+            string text = to_string(score);
+            txb2.Settext(text, render);
+        }
+    }
+    move = 0;
+    rotate = false;
+
+    if (score >= 3000) delay = 300;
+    else if (score >= 2000) delay = 500;
+    else if (score >= 1000) delay = 700;
+    else delay = 1000;
+}
+
 string Tetris::GetExeDir() {
     char buffer[MAX_PATH];
     GetModuleFileNameA(NULL, buffer, MAX_PATH);
