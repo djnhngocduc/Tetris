@@ -202,6 +202,59 @@ void Tetris::SaveHighScore() {
     }
 }
 
+void Tetris::GameOverScreen(bool& goBackToMenu, bool& playAgain) {
+    Mix_HaltMusic();
+
+    Mix_Music* music = Mix_LoadMUS("sound/gameover.wav");
+    Mix_VolumeMusic(45);
+    Mix_PlayMusic(music, 0);
+
+    textbox txAgain, txBack;
+
+    txAgain.Loadtext("UTM Cookies.ttf", 50);
+    txAgain.Setcolor(255, 255, 255, 255);
+    txAgain.Settext("Again", render);
+
+    txBack.Loadtext("UTM Cookies.ttf", 50);
+    txBack.Setcolor(255, 255, 255, 255);
+    txBack.Settext("Back", render);
+
+    SDL_Rect againRect = { 380, 450, 200, 60 }, backRect = { 100, 450, 200, 60 };
+
+    bool waiting = true;
+    while (waiting) {
+        SDL_RenderClear(render);
+        SDL_RenderCopy(render, back1, NULL, NULL);
+        txb_gameover.Draw(render, 100, 50);
+        txb1.Draw(render, 200, 150);
+        txb2.Draw(render, 350, 150);
+        txAgain.Draw(render, againRect.x, againRect.y);
+        txBack.Draw(render, backRect.x, backRect.y);
+        SDL_RenderPresent(render);
+
+        SDL_Event e;
+        while (SDL_PollEvent(&e)) {
+            if (e.type == SDL_QUIT) {
+                wait = false;
+                waiting = false;
+            }
+            if (e.type == SDL_MOUSEBUTTONDOWN) {
+                int mx, my;
+                SDL_GetMouseState(&mx, &my);
+                if (mx >= againRect.x && mx <= againRect.x + againRect.w && my >= againRect.y && my <= againRect.y + againRect.h) {
+                    playAgain = true;
+                    waiting = false;
+                }
+                if (mx >= backRect.x && mx <= backRect.x + backRect.w && my >= backRect.y && my <= backRect.y + backRect.h) {
+                    goBackToMenu = true;
+                    waiting = false;
+                }
+            }
+        }
+    }
+}
+
+
 void Tetris::Reset() {
     memset(matrix, 0, sizeof(matrix));
     score = 0;
@@ -228,4 +281,8 @@ void Tetris::Reset() {
     txb_high2.Settext(to_string(highScores[theme]), render);
     running = true;
     gameOver = false;
+}
+
+bool Tetris::isGameOver() {
+    return gameOver;
 }

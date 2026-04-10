@@ -34,8 +34,10 @@ public:
 	void SaveHighScore();
 	void LoadHighScore();
 
+	void GameOverScreen(bool& goBackToMenu, bool& playAgain);
 	void Reset();
 
+	bool isGameOver();
 
 private:
 	enum {
