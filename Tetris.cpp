@@ -129,6 +129,37 @@ void Tetris::GameOver() {
     }
 }
 
+void Tetris::UpdateRender() {
+    if (ispaused == true) return;
+    SDL_RenderCopy(render, back2, NULL, NULL);
+    txb1.Draw(render, 450, 300);
+    txb2.Draw(render, 450, 350);
+    txb_high1.Draw(render, 450, 400);
+    txb_high2.Draw(render, 450, 450);
+
+    //va cham vs day ( luu hinh anh cuoi cung khi o day - bao gom ca mau sac)
+    for (int i = 0; i < Lines; i++) {
+        for (int j = 0; j < Cols; j++) {
+            if (matrix[i][j]) {
+                SetPosRect(srcR, matrix[i][j] * BlockW);  // Giu nguyen mau cua block khi dang o day
+                SetPosRect(destR, j * BlockW, i * BlockH);
+                Moveblocks(destR, BlockW, ScreenH - (Lines + 1) * BlockH);
+                SDL_RenderCopy(render, blocks, &srcR, &destR);
+            }
+        }
+    }
+
+    //Tao block
+    for (int i = 0; i < 4; i++) {
+        SetPosRect(srcR, color * BlockW);
+        SetPosRect(destR, items[i].x * BlockW, items[i].y * BlockH);
+        Moveblocks(destR, BlockW, ScreenH - (Lines + 1) * BlockH);
+        SDL_RenderCopy(render, blocks, &srcR, &destR);
+    }
+
+    SDL_RenderPresent(render);
+
+}
 
 string Tetris::GetExeDir() {
     char buffer[MAX_PATH];

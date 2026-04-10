@@ -25,6 +25,7 @@ public:
 	void Gameplay();
 
 	void GameOver();
+	void UpdateRender();
 
 	string GetExeDir();
 
