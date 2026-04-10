@@ -105,13 +105,13 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\C++\2026\Tetris\SDL2\SDL2\include;D:\C++\2026\Tetris\SDL2\SDL2_mixer\include;D:\C++\2026\Tetris\SDL2\SDL2_ttf\include;D:\C++\2026\Tetris\SDL2\SDL2_image\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2_ttf\include;C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2_mixer\include;C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2_image\include;C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\C++\2026\Tetris\SDL2\SDL2_ttf\lib\x64;D:\C++\2026\Tetris\SDL2\SDL2_mixer\lib\x64;D:\C++\2026\Tetris\SDL2\SDL2_image\lib\x64;D:\C++\2026\Tetris\SDL2\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2_ttf\lib\x64;C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2_mixer\lib\x64;C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2_image\lib\x64;C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -123,17 +123,24 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2_ttf\include;C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2_mixer\include;C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2_image\include;C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2_ttf\lib\x64;C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2_mixer\lib\x64;C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2_image\lib\x64;C:\Users\Windows\OneDrive\Documents\GitHub\Tetris\SDL2\SDL2\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Downloads\Samsung-main\Tetris\sound.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\Samsung-main\Tetris\textbox.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Tetris.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Downloads\Samsung-main\Tetris\sound.h" />
+    <ClInclude Include="..\..\..\..\Downloads\Samsung-main\Tetris\textbox.h" />
     <ClInclude Include="Tetris.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,21 +1,60 @@
-#include <SDL.h>
+#include "Tetris.h"
+#include <iostream>
+#include <ctime>
 
+using namespace std;
+
+#undef main
 int main(int argc, char* argv[]) {
-	SDL_Window* window = SDL_CreateWindow("SETUP MY GAME", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 600, SDL_WINDOW_SHOWN);
+    srand(static_cast<unsigned int>(time(0)));
+    Tetris* game = new Tetris();
+    sound Sound;
+    const char* name = "Tetris";
+    game->init(name);
+    while (game->TetrisWait()) {
+        while (game->Tetrisrunning()) {
+            game->setCurrentTime(SDL_GetTicks());
+            game->handleEvents();
 
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+            if (game->Tetrisback1()) {
+                game->Loadingback1();
+            }
+            else if (game->isChoosingTheme()) {
+                game->ChooseTheme();
+            }
+            else {
+                game->Gameplay();
+                game->UpdateRender();
+            }
+            game->GameOver();
+        }
 
-	while (1) {
-		SDL_SetRenderDrawColor(renderer, 0, 0, 123, 0);
-		SDL_RenderClear(renderer);
+        if (game->isGameOver()) {
+            bool goBackToMenu = false, playAgain = false;
+            game->GameOverScreen(goBackToMenu, playAgain);
+            Mix_HaltMusic();
 
-		SDL_Rect rect = { 100, 100, 100, 100 };
+            if (goBackToMenu) {
+                game->Setback1(true);
+                Sound.Audio_long("sound/background1.mp3");
+            }
 
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-		SDL_RenderFillRect(renderer, &rect);
+            if (playAgain) {
+                game->Setback1(false);
+                Mix_Music* music = Mix_LoadMUS("sound/op1.mp3");
+                Mix_VolumeMusic(200);
+                Mix_PlayMusic(music, -1);
+            }
+            game->Reset();
+        }
 
-		SDL_RenderPresent(renderer);
-	}
-
-	return 0;
+        SDL_Event e;
+        if (SDL_PollEvent(&e)) {
+            if (e.type == SDL_QUIT) {
+                break;
+            }
+        }
+    }
+    game->Clean();
+    return 0;
 }

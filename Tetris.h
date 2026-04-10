@@ -56,7 +56,16 @@ public:
 
 	~Tetris() {}
 
+	void setCurrentTime(Uint32 t);
+
+	bool Tetrisrunning();
+	bool Tetrisback1();
+	void Setback1(bool x);
 	bool Tetrisvalid();
+	bool init(const char* name);
+	void Loadingback1();
+
+	void Randomblocks();
 
 	void Gameplay();
 
@@ -64,6 +73,7 @@ public:
 	void UpdateRender();
 
 	void Clean();
+	bool TetrisWait();
 
 	string GetExeDir();
 

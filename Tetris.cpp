@@ -14,6 +14,21 @@ const int Tetris::shapes[7][4] = {
     2,1,5,4,
     2,6,5,4,
 };
+void Tetris::setCurrentTime(Uint32 t) {
+    currentTime = t;
+}
+
+bool Tetris::Tetrisrunning() {
+    return running;
+}
+
+bool Tetris::Tetrisback1() {
+    return inback1;
+}
+
+void Tetris::Setback1(bool x) {
+    inback1 = x;
+}
 
 bool Tetris::Tetrisvalid() {
     //ktra va cham 
@@ -29,6 +44,126 @@ bool Tetris::Tetrisvalid() {
             }
         }
     return true;
+}
+
+bool Tetris::init(const char* name) {
+    if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
+        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
+        window = SDL_CreateWindow(name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenW, ScreenH, SDL_WINDOW_SHOWN);
+        if (window != NULL) {
+            render = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+            if (render != NULL) {
+                SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
+                int imgFlags = IMG_INIT_PNG;
+                int initted = IMG_Init(imgFlags);
+                if ((initted & imgFlags) != imgFlags) {
+                    cout << "Failed to init required png support\n" << "IMG_Init() Error : " << IMG_GetError() << endl;
+                }
+
+                back2 = IMG_LoadTexture(render, "img/background2.png");
+                blocks = IMG_LoadTexture(render, "img/blocks.png");
+                back1 = IMG_LoadTexture(render, "img/background1.jpg");
+                imgplay1 = IMG_LoadTexture(render, "img/imgplay1.png");
+                imgplay2 = IMG_LoadTexture(render, "img/imgplay2.png");
+                inhelp1 = IMG_LoadTexture(render, "img/help1.png");
+                inhelp2 = IMG_LoadTexture(render, "img/help.jpg");
+                backBtn = IMG_LoadTexture(render, "img/back.png");
+
+                if (TTF_Init() != 0) {
+                    cout << TTF_GetError();
+                }
+
+                LoadHighScore();
+
+                txb1.Loadtext("UTM Cookies.ttf", 45);
+                txb2.Loadtext("UTM Cookies.ttf", 45);
+                txb_high1.Loadtext("UTM Cookies.ttf", 45);
+                txb_high2.Loadtext("UTM Cookies.ttf", 45);
+                txb_gameover.Loadtext("UTM Cookies.ttf", 80);
+
+                txb1.Setcolor(255, 213, 128, 0);
+                txb2.Setcolor(255, 213, 128, 0);
+                txb_high1.Setcolor(255, 213, 128, 0);
+                txb_high2.Setcolor(255, 213, 128, 0);
+                txb_gameover.Setcolor(255, 99, 71, 0);
+
+                txb1.Settext("SCORE: ", render);
+                txb2.Settext("0", render);
+                txb_high1.Settext("HIGH: ", render);
+                txb_gameover.Settext("Game over", render);
+
+                Randomblocks();
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+    else {
+        return false;
+    }
+
+    inback1 = true;
+    running = true;
+    return true;
+}
+
+void Tetris::Loadingback1() {
+    SDL_GetMouseState(&xpos, &ypos);
+    SDL_RenderCopy(render, back1, NULL, NULL);
+
+    SDL_Rect dst1;
+    dst1.x = 20;
+    dst1.y = 70;
+    dst1.w = 135;
+    dst1.h = 88;
+
+    SDL_Rect dst;
+    dst.x = 450;
+    dst.y = 70;
+    dst.w = 135;
+    dst.h = 88;
+
+
+    if (450 <= xpos && xpos <= (135 + 450) && 40 <= ypos && ypos <= (40 + 88)) {
+        Sound.Audio_short("sound/play.wav");
+        SDL_RenderCopy(render, imgplay2, NULL, &dst);
+        SDL_RenderPresent(render);
+    }
+    else {
+        SDL_RenderCopy(render, imgplay1, NULL, &dst);
+    }
+
+    if (20 <= xpos && xpos <= (135 + 20) && 70 <= ypos && ypos <= (70 + 88)) {
+        // render cach choi
+        SDL_RenderCopy(render, inhelp2, NULL, NULL);
+    }
+    else {
+        SDL_RenderCopy(render, inhelp1, NULL, &dst1);
+    }
+
+    if (!isPlayed) {
+        Sound.Audio_long("sound/background1.mp3");
+        isPlayed = true;
+    }
+
+    SDL_RenderPresent(render);
+}
+
+void Tetris::Randomblocks() {
+    color = 1 + rand() % 7;
+    int n = rand() % 7;
+    for (int i = 0; i < 4; i++) {
+        items[i].x = shapes[n][i] % 4;
+        items[i].y = shapes[n][i] / 4;
+    }
+}
+
+bool Tetris::TetrisWait() {
+    return wait;
 }
 
 void Tetris::Gameplay() {
