@@ -161,6 +161,16 @@ void Tetris::UpdateRender() {
 
 }
 
+// chong tran bo nho
+void Tetris::Clean() {
+    SDL_DestroyTexture(blocks);
+    SDL_DestroyTexture(back2);
+    SDL_DestroyTexture(backBtn);
+    SDL_DestroyRenderer(render);
+    IMG_Quit();
+    SDL_Quit();
+}
+
 string Tetris::GetExeDir() {
     char buffer[MAX_PATH];
     GetModuleFileNameA(NULL, buffer, MAX_PATH);
@@ -190,4 +200,32 @@ void Tetris::SaveHighScore() {
         }
         file.close();
     }
+}
+
+void Tetris::Reset() {
+    memset(matrix, 0, sizeof(matrix));
+    score = 0;
+    move = 0;
+    rotate = false;
+    delay = 1000;
+    ispaused = false;
+    startTime = 0;
+    Randomblocks();
+
+    string text = to_string(score);
+    txb2.Settext(text, render);
+
+    string theme;
+    if (currentTheme == CLASSIC) {
+        theme = "Classic";
+    }
+    else if (currentTheme == NEON) {
+        theme = "Neon";
+    }
+    else {
+        theme = "Retro";
+    }
+    txb_high2.Settext(to_string(highScores[theme]), render);
+    running = true;
+    gameOver = false;
 }

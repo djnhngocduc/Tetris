@@ -27,10 +27,14 @@ public:
 	void GameOver();
 	void UpdateRender();
 
+	void Clean();
+
 	string GetExeDir();
 
 	void SaveHighScore();
 	void LoadHighScore();
+
+	void Reset();
 
 
 private:
