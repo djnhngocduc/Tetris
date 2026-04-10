@@ -20,6 +20,7 @@ public:
 		highScores["Retro"] = 0;
 
 	}
+	bool Tetrisvalid();
 
 	string GetExeDir();
 

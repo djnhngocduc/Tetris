@@ -15,6 +15,22 @@ const int Tetris::shapes[7][4] = {
     2,6,5,4,
 };
 
+bool Tetris::Tetrisvalid() {
+    //ktra va cham 
+    for (int i = 0; i < 4; i++)
+        if (items[i].x < 0 || items[i].x >= Cols || items[i].y >= Lines) {
+            //va cham matrix
+            return false;
+        }
+        else {
+            if (matrix[items[i].y][items[i].x]) {
+                //va cham vs block
+                return false;
+            }
+        }
+    return true;
+}
+
 string Tetris::GetExeDir() {
     char buffer[MAX_PATH];
     GetModuleFileNameA(NULL, buffer, MAX_PATH);
