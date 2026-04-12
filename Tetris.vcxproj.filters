@@ -21,10 +21,10 @@
     <ClCompile Include="Tetris.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\Samsung-main\Tetris\sound.cpp">
+    <ClCompile Include="sound.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\Samsung-main\Tetris\textbox.cpp">
+    <ClCompile Include="textbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,10 +32,10 @@
     <ClInclude Include="Tetris.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\Samsung-main\Tetris\sound.h">
+    <ClInclude Include="sound.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\Samsung-main\Tetris\textbox.h">
+    <ClInclude Include="textbox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
