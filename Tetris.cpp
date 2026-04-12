@@ -161,7 +161,7 @@ void Tetris::Randomblocks() {
         items[i].y = shapes[n][i] / 4;
     }
 }
-/////////////////////////////////////////
+
 void Tetris::handleEvents() {
     SDL_Event m;
     while (SDL_PollEvent(&m)) {
@@ -318,7 +318,7 @@ void Tetris::Moveblocks(SDL_Rect& rect, int x, int y) {
     rect.x += x;
     rect.y += y;
 }
-/////////////////////////////////////////
+
 
 void Tetris::Gameplay() {
     gameOver = true;

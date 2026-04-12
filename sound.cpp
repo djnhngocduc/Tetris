@@ -16,7 +16,7 @@ void sound::Audio_long(const char* song) {
 		Mix_PlayMusic(music, -1);
 	}
 }
-//////////////////////////
+
 void sound::Audio_short(const char* song) {
 	Mix_Chunk* inlist = NULL;
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1) {

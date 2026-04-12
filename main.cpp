@@ -41,8 +41,8 @@ int main(int argc, char* argv[]) {
 
             if (playAgain) {
                 game->Setback1(false);
-                Mix_Music* music = Mix_LoadMUS("sound/op1.mp3");
-                Mix_VolumeMusic(200);
+                Mix_Music* music = Mix_LoadMUS("sound/background2(Unwelcome_School).wav");
+                Mix_VolumeMusic(15);
                 Mix_PlayMusic(music, -1);
             }
             game->Reset();

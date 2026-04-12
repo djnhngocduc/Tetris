@@ -123,25 +123,25 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-	  <AdditionalIncludeDirectories>$(ProjectDir)SDL2\SDL2_ttf\include;$(ProjectDir)SDL2\SDL2_mixer\include;$(ProjectDir)SDL2\SDL2_image\include;$(ProjectDir)SDL2\SDL2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)SDL2\SDL2_ttf\include;$(ProjectDir)SDL2\SDL2_mixer\include;$(ProjectDir)SDL2\SDL2_image\include;$(ProjectDir)SDL2\SDL2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-	  <AdditionalLibraryDirectories>$(ProjectDir)SDL2\SDL2_ttf\lib\x64;$(ProjectDir)SDL2\SDL2_mixer\lib\x64;$(ProjectDir)SDL2\SDL2_image\lib\x64;$(ProjectDir)SDL2\SDL2\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)SDL2\SDL2_ttf\lib\x64;$(ProjectDir)SDL2\SDL2_mixer\lib\x64;$(ProjectDir)SDL2\SDL2_image\lib\x64;$(ProjectDir)SDL2\SDL2\lib\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="sound.cpp" />
-    <ClCompile Include="textbox.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="sound.cpp" />
     <ClCompile Include="Tetris.cpp" />
+    <ClCompile Include="textbox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sound.h" />
-    <ClInclude Include="textbox.h" />
     <ClInclude Include="Tetris.h" />
+    <ClInclude Include="textbox.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

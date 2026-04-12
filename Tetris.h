@@ -8,7 +8,6 @@
 #include <map>
 #include "textbox.h"
 #include "sound.h"
-using namespace std;
 
 class Tetris {
 public:
@@ -70,6 +69,7 @@ public:
 	void handleEvents();
 	void SetPosRect(SDL_Rect& rect, int x = 0, int y = 0, int w = BlockW, int h = BlockH);
 	void Moveblocks(SDL_Rect& rect, int x, int y); // Di chuyen cac khoi block
+
 	void Gameplay();
 
 	void GameOver();
@@ -92,7 +92,9 @@ public:
 	void Reset();
 
 	bool isGameOver();
+
 	string GetExeDir();
+
 private:
 	enum {
 		ScreenW = 600,

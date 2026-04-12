@@ -21,9 +21,6 @@
     <ClCompile Include="Tetris.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sound.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="textbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
