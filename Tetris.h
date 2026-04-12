@@ -67,6 +67,9 @@ public:
 
 	void Randomblocks();
 
+	void handleEvents();
+	void SetPosRect(SDL_Rect& rect, int x = 0, int y = 0, int w = BlockW, int h = BlockH);
+	void Moveblocks(SDL_Rect& rect, int x, int y); // Di chuyen cac khoi block
 	void Gameplay();
 
 	void GameOver();
@@ -75,16 +78,21 @@ public:
 	void Clean();
 	bool TetrisWait();
 
-	string GetExeDir();
-
 	void SaveHighScore();
 	void LoadHighScore();
+
+	void ChooseTheme();
+	void ApplyTheme();
+
+	bool isChoosingTheme() const {
+		return choosingTheme;
+	}
 
 	void GameOverScreen(bool& goBackToMenu, bool& playAgain);
 	void Reset();
 
 	bool isGameOver();
-
+	string GetExeDir();
 private:
 	enum {
 		ScreenW = 600,
